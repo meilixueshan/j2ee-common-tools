@@ -4,6 +4,8 @@
  */
 package com.meilixueshan.j2eecommontools;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author Administrator
@@ -99,5 +101,49 @@ public final class StringExtension {
      */
     public static double toDouble(String str) {
         return toDouble(str, 0);
+    }
+    
+    /**
+     * 字符串转BigDecimal
+     * @param str
+     *          待转换的字符串
+     * @param failValue
+     *          转换失败时返回的值
+     * @return 
+     *          返回转换后的值
+     */
+    public static BigDecimal toBigDecimal(String str, double failValue) {
+        BigDecimal result;
+        try {
+            result = new BigDecimal(str);
+        } catch (Exception e) {
+            result = BigDecimal.valueOf(failValue);
+        }
+        return result;
+    }
+    
+    /**
+     * 字符串转BigDecimal
+     * @param str
+     *          待转换的字符串
+     * @return 
+     *          返回转换后的值（如果转换失败则返回0）
+     */
+    public static BigDecimal toBigDecimal(String str) {
+        return toBigDecimal(str, 0);
+    }
+    
+    /**
+     * 字符串转Boolean
+     * @param str
+     *          待转换的字符串
+     * @return 
+     *          返回转换后的值（只有当字符串为true时，不区分大小写，才返回true，其余均返回false）
+     */
+    public static boolean toBoolean(String str) {
+        if(str != null && str.toLowerCase().equals("true")) {
+            return true;
+        }
+        return false;
     }
 }
